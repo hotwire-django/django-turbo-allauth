@@ -8,7 +8,7 @@ from pytest_django.asserts import assertTemplateUsed
 pytestmark = pytest.mark.django_db
 
 
-class TestLogin:
+class TestLoginView:
     def test_get(self, client):
         resp = client.get(reverse("account_login"))
         assert resp.status_code == 200
@@ -33,7 +33,7 @@ class TestLogin:
         assert resp.url == "/"
 
 
-class TestSignup:
+class TestSignupView:
     def test_get(self, client):
         resp = client.get(reverse("account_signup"))
         assert resp.status_code == 200
@@ -68,3 +68,17 @@ class TestSignup:
         assert resp.url == "/"
         user = user_model.objects.get(username="tester")
         assert user.check_password("good-pass-1234")
+
+
+class TestEmailView:
+    def test_get(self, client, login_user):
+        resp = client.get(reverse("account_email"))
+        assert resp.status_code == 200
+        assert b'id="add-email-form"' in resp.content
+
+    def test_add_email_unsuccessful(self, client, login_user):
+        resp = client.post(
+            reverse("account_email"), {"action_add": "true", "email": "bad-email"}
+        )
+        assert resp.status_code == 200
+        assert b'target="add-email-form"' in resp.content
