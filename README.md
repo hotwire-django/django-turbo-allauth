@@ -27,7 +27,7 @@ Full documentation on ReadTheDocs:
 https://django-turbo-allauth.readthedocs.io/en/latest/
 
 
-# License
+## License
 
 This project is covered by the MIT license.
 
