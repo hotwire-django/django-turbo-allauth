@@ -133,7 +133,8 @@ class TestPasswordSetView:
 
 
 class TestPasswordResetFromKeyView:
-    def test_get(self, client, user, password_reset_kwargs):
+    def test_get_and_post(self, client, user, password_reset_kwargs):
+        """Do everything in one test run to preserve session"""
         resp = client.get(
             reverse("account_reset_password_from_key", kwargs=password_reset_kwargs)
         )
@@ -149,4 +150,18 @@ class TestPasswordResetFromKeyView:
             )
         )
         assert resp.status_code == 200
+        print(resp.content)
+        assert b'id="password-reset-from-key-form"' in resp.content
+        assertTemplateUsed(resp, "account/_password_reset_from_key.html")
+
+        resp = client.post(
+            reverse(
+                "account_reset_password_from_key",
+                kwargs={**password_reset_kwargs, "key": "set-password"},
+            ),
+            {"password1": "bad-testpass", "password2": "bad-testpass-2",},
+        )
+        assert resp.status_code == 200
+        assert resp.status_code == 200
+        assert b'target="password-reset-from-key-form"' in resp.content
         assertTemplateUsed(resp, "account/_password_reset_from_key.html")
