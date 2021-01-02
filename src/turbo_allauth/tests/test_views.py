@@ -82,3 +82,27 @@ class TestEmailView:
         )
         assert resp.status_code == 200
         assert b'target="add-email-form"' in resp.content
+
+    def test_add_email_successful(self, client, login_user):
+        url = reverse("account_email")
+        resp = client.post(url, {"action_add": "true", "email": "tester-2@gmail.com"})
+        assert resp.url == url
+        assert login_user.emailaddress_set.count() == 2
+
+
+class TestPasswordResetView:
+    def test_get(self, client):
+        resp = client.get(reverse("account_reset_password"))
+        assert resp.status_code == 200
+        assert b'id="password-reset-form"' in resp.content
+
+    def test_post_unsuccessful(self, client):
+        resp = client.post(
+            reverse("account_reset_password"), {"email": "bad-email.com"}
+        )
+        assert resp.status_code == 200
+        assert b'target="password-reset-form"' in resp.content
+
+    def test_post_successful(self, client, user):
+        resp = client.post(reverse("account_reset_password"), {"email": user.email})
+        assert resp.url == reverse("account_reset_password_done")
