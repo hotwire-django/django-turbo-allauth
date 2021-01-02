@@ -49,4 +49,5 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "testapp.urls"
 
+LOGIN_REDIRECT_URL = "/"
 SITE_ID = 1
