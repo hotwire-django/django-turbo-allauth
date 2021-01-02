@@ -10,7 +10,9 @@ from django.utils.functional import cached_property
 # Third Party Libraries
 import pytest
 from allauth.account.forms import EmailAwarePasswordResetTokenGenerator
+from allauth.account.models import EmailAddress
 from allauth.account.utils import user_pk_to_url_str
+from allauth.socialaccount.models import SocialAccount, SocialLogin
 
 TEST_PASSWORD = "testpass1"
 
@@ -82,3 +84,18 @@ def password_reset_kwargs(user):
     return dict(
         uidb36=user_pk_to_url_str(user), key=default_token_generator.make_token(user)
     )
+
+
+@pytest.fixture
+def sociallogin(client, user_with_unusable_password):
+    account = SocialAccount.objects.create(
+        user=user_with_unusable_password, provider="google"
+    )
+    email = EmailAddress.objects.create(email=account.user.email, user=account.user)
+    sociallogin = SocialLogin(
+        account=account, user=account.user, email_addresses=[email]
+    )
+    session = client.session
+    session["socialaccount_sociallogin"] = sociallogin.serialize()
+    session.save()
+    return sociallogin

@@ -172,3 +172,9 @@ class TestPasswordResetFromKeyView:
             {"password1": "good-testpass-1", "password2": "good-testpass-1",},
         )
         assert resp.url == reverse("account_reset_password_from_key_done")
+
+
+class TestSocialLogin:
+    def test_get(self, client, sociallogin):
+        resp = client.get(reverse("socialaccount_signup"))
+        assert resp.status_code == 200

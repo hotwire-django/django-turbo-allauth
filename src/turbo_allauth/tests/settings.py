@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "turbo_allauth.tests.testapp.apps.TestAppConfig",
 ]
 
@@ -51,3 +52,10 @@ ROOT_URLCONF = "testapp.urls"
 
 LOGIN_REDIRECT_URL = "/"
 SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": ["profile", "email",],
+        "AUTH_PARAMS": {"access_type": "online",},
+    }
+}
