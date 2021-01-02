@@ -1,0 +1,10 @@
+{% load i18n %}
+<form method="post"
+      action="{% url 'account_email' %}"
+      class="add_email"
+      id="{{ turbo_stream_target }}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button name="action_add"
+          type="submit">{% trans "Add E-mail" %}</button>
+</form>
