@@ -75,6 +75,7 @@ class TestEmailView:
         resp = client.get(reverse("account_email"))
         assert resp.status_code == 200
         assert b'id="add-email-form"' in resp.content
+        assertTemplateUsed(resp, "account/_add_email.html")
 
     def test_add_email_unsuccessful(self, client, login_user):
         resp = client.post(
@@ -82,6 +83,7 @@ class TestEmailView:
         )
         assert resp.status_code == 200
         assert b'target="add-email-form"' in resp.content
+        assertTemplateUsed(resp, "account/_add_email.html")
 
     def test_add_email_successful(self, client, login_user):
         url = reverse("account_email")
@@ -95,6 +97,7 @@ class TestPasswordResetView:
         resp = client.get(reverse("account_reset_password"))
         assert resp.status_code == 200
         assert b'id="password-reset-form"' in resp.content
+        assertTemplateUsed(resp, "account/_password_reset.html")
 
     def test_post_unsuccessful(self, client):
         resp = client.post(
@@ -102,6 +105,7 @@ class TestPasswordResetView:
         )
         assert resp.status_code == 200
         assert b'target="password-reset-form"' in resp.content
+        assertTemplateUsed(resp, "account/_password_reset.html")
 
     def test_post_successful(self, client, user):
         resp = client.post(reverse("account_reset_password"), {"email": user.email})
@@ -109,15 +113,40 @@ class TestPasswordResetView:
 
 
 class TestPasswordSetView:
+    def test_get_if_usable_password(self, client, login_user):
+        resp = client.get(reverse("account_set_password"))
+        assert resp.url == reverse("account_change_password")
+
     def test_get(self, client, login_user_with_unusable_password):
-        resp = client.get(reverse("account_set_password",))
+        resp = client.get(reverse("account_set_password"))
         assert resp.status_code == 200
         assert b'id="password-set-form"' in resp.content
+        assertTemplateUsed(resp, "account/_password_set.html")
 
     def test_post_unsuccessful(self, client, login_user_with_unusable_password):
         resp = client.post(
             reverse("account_set_password",),
-            {"password1": "badpass", "password2": "badpass-1",},
+            {"password1": "badpass", "password2": "badpass-1"},
         )
         assert resp.status_code == 200
         assert b'target="password-set-form"' in resp.content
+
+
+class TestPasswordResetFromKeyView:
+    def test_get(self, client, user, password_reset_kwargs):
+        resp = client.get(
+            reverse("account_reset_password_from_key", kwargs=password_reset_kwargs)
+        )
+        assert resp.url == reverse(
+            "account_reset_password_from_key",
+            kwargs={**password_reset_kwargs, "key": "set-password"},
+        )
+
+        resp = client.get(
+            reverse(
+                "account_reset_password_from_key",
+                kwargs={**password_reset_kwargs, "key": "set-password"},
+            )
+        )
+        assert resp.status_code == 200
+        assertTemplateUsed(resp, "account/_password_reset_from_key.html")

@@ -65,11 +65,16 @@ def login_user(client, user, test_password):
 
 
 @pytest.fixture
-def login_user_with_unusable_password(client, user):
+def user_with_unusable_password(user):
     user.set_unusable_password()
     user.save()
-    client.force_login(user)
     return user
+
+
+@pytest.fixture
+def login_user_with_unusable_password(client, user_with_unusable_password):
+    client.force_login(user_with_unusable_password)
+    return user_with_unusable_password
 
 
 @pytest.fixture
