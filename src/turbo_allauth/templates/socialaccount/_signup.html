@@ -1,6 +1,6 @@
 {% load i18n %}
 <form class="signup"
-      id="{{ turbo_stream_target }}"
+      id="{{ view.turbo_stream_target }}"
       method="post"
       action="{% url 'socialaccount_signup' %}">
   {% csrf_token %}

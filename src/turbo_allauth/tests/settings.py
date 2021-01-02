@@ -25,10 +25,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
+    "turbo_allauth",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "turbo_allauth",
     "turbo_allauth.tests.testapp.apps.TestAppConfig",
 ]
 
