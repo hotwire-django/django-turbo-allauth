@@ -16,7 +16,7 @@ This library is tested for Python 3.8+.
 
 To install from Git:
 
-> git clone https://github.com/danjac/django-turbo-allauth
+> git clone https://github.com/hotwire-django/django-turbo-allauth
 
 > cd django-turbo-allauth
 
