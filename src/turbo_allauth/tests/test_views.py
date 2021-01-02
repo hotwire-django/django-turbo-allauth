@@ -174,7 +174,17 @@ class TestPasswordResetFromKeyView:
         assert resp.url == reverse("account_reset_password_from_key_done")
 
 
-class TestSocialLogin:
+class TestSocialSignup:
     def test_get(self, client, sociallogin):
         resp = client.get(reverse("socialaccount_signup"))
         assert resp.status_code == 200
+        assert b'id="signup-form"' in resp.content
+        assertTemplateUsed(resp, "socialaccount/_signup.html")
+
+    def test_post_unsuccessful(self, client, sociallogin):
+        resp = client.post(
+            reverse("socialaccount_signup"), {"email": "bad-email", "username": ""}
+        )
+        assert resp.status_code == 200
+        assert b'target="signup-form"' in resp.content
+        assertTemplateUsed(resp, "socialaccount/_signup.html")
