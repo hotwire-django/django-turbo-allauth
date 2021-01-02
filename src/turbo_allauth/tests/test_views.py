@@ -188,3 +188,12 @@ class TestSocialSignup:
         assert resp.status_code == 200
         assert b'target="signup-form"' in resp.content
         assertTemplateUsed(resp, "socialaccount/_signup.html")
+
+    def test_post_successful(self, client, sociallogin, user_model):
+        resp = client.post(
+            reverse("socialaccount_signup"),
+            {"email": "good-email@gmail.com", "username": "tester"},
+        )
+        assert resp.url == "/"
+        user = user_model.objects.get(username="tester")
+        assert user.email == "good-email@gmail.com"
