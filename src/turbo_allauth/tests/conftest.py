@@ -4,14 +4,17 @@ import uuid
 # Django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
-from django.contrib.sites.models import Site
 from django.http import HttpResponse
 from django.utils.functional import cached_property
 
 # Third Party Libraries
 import pytest
+from allauth.account.forms import EmailAwarePasswordResetTokenGenerator
+from allauth.account.utils import user_pk_to_url_str
 
 TEST_PASSWORD = "testpass1"
+
+default_token_generator = EmailAwarePasswordResetTokenGenerator()
 
 
 class MockSession(dict):
@@ -30,11 +33,6 @@ def test_password():
 @pytest.fixture
 def mock_session():
     return MockSession
-
-
-@pytest.fixture
-def site():
-    return Site.objects.get_current()
 
 
 @pytest.fixture
@@ -64,3 +62,18 @@ def anonymous_user():
 def login_user(client, user, test_password):
     client.login(username=user.username, password=test_password)
     return user
+
+
+@pytest.fixture
+def login_user_with_unusable_password(client, user):
+    user.set_unusable_password()
+    user.save()
+    client.force_login(user)
+    return user
+
+
+@pytest.fixture
+def password_reset_kwargs(user):
+    return dict(
+        uidb36=user_pk_to_url_str(user), key=default_token_generator.make_token(user)
+    )
