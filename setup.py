@@ -15,7 +15,7 @@ setup(
     long_description_content_type="text/markdown",
     license="MIT",
     python_requires=">=3.8",
-    requires=["django (>=3.1)", "django-turbo-response", "django-allauth"],
+    install_requires=["django (>=3.1)", "django-turbo-response", "django-allauth"],
     packages=["turbo_allauth"],
     package_dir={"": "src"},
     classifiers=[
