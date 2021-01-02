@@ -150,7 +150,6 @@ class TestPasswordResetFromKeyView:
             )
         )
         assert resp.status_code == 200
-        print(resp.content)
         assert b'id="password-reset-from-key-form"' in resp.content
         assertTemplateUsed(resp, "account/_password_reset_from_key.html")
 
@@ -162,6 +161,14 @@ class TestPasswordResetFromKeyView:
             {"password1": "bad-testpass", "password2": "bad-testpass-2",},
         )
         assert resp.status_code == 200
-        assert resp.status_code == 200
         assert b'target="password-reset-from-key-form"' in resp.content
         assertTemplateUsed(resp, "account/_password_reset_from_key.html")
+
+        resp = client.post(
+            reverse(
+                "account_reset_password_from_key",
+                kwargs={**password_reset_kwargs, "key": "set-password"},
+            ),
+            {"password1": "good-testpass-1", "password2": "good-testpass-1",},
+        )
+        assert resp.url == reverse("account_reset_password_from_key_done")
