@@ -16,7 +16,7 @@ setup(
     license="MIT",
     python_requires=">=3.8",
     install_requires=["django (>=3.1)", "django-turbo-response", "django-allauth"],
-    packages=["turbo_allauth"],
+    packages=["turbo_allauth", "turbo_allauth.views"],
     package_dir={"": "src"},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
