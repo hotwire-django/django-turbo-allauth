@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Third Party Libraries
-from setuptools import setup
+from setuptools import find_packages, setup
 
 version = "0.0.1"
 
@@ -16,7 +16,7 @@ setup(
     license="MIT",
     python_requires=">=3.8",
     install_requires=["django (>=3.1)", "django-turbo-response", "django-allauth"],
-    packages=["turbo_allauth", "turbo_allauth.views"],
+    packages=[find_packages()],
     package_dir={"": "src"},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
