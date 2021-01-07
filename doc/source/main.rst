@@ -41,6 +41,7 @@ Make sure to add **allauth.account** and **allauth.socialaccount** to **INSTALLE
 
 Finally add this to your url configuration:
 
+
 .. code-block:: python
 
    urlpatterns = [
