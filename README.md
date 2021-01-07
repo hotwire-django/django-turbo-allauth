@@ -1,6 +1,6 @@
 ## Hotwired/Turbo django-allauth integration
 
-This package provides subclasses modifying the django-allauth views https://github.com/pennersr/django-allauth so they can work with Turbo Streams for form validation. The package django-turbo-response https://github.com/hotwire-django/django-turbo-response is used to provide the required mixin classes.
+This package provides subclasses modifying the django-allauth views https://github.com/pennersr/django-allauth to provide valid return codes.
 
 This package is required in order to provide allauth compatability with Turbo. Turbo form validation either setting the attribute *data-turbo="false"* in the form, or returning a 4** response. This provides subclasses for the latter.
 

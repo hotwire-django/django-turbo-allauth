@@ -1,9 +1,9 @@
-This package provides subclasses modifying the `django-allauth views <https://github.com/pennersr/django-allauth>`_ so they can work with Turbo Streams for form validation. The package `django-turbo-response <https://github.com/hotwire-django/django-turbo-response>`_ is used to provide the required mixin classes.
+This package provides subclasses modifying the `django-allauth views <https://github.com/pennersr/django-allauth>`_ views in order to return valid return codes for use with Turbo.
 
 This package is required in order to provide allauth compatability with Turbo. Turbo form validation either setting the attribute *data-turbo="false"* in the form, or returning a 4** response. This provides subclasses for the latter.
 
 
-**Disclaimer**: the Hotwired/Turbo client libraries are, at time of writing, still in Beta. We expect there will be breaking changes until the first stable release. This package, and the Turbo client, should therefore be used with caution in a production environment. The version used in testing is *@hotwired/turbo==7.0.0-beta.1*.
+**Disclaimer**: the Hotwired/Turbo client libraries are, at time of writing, still in Beta. We expect there will be breaking changes until the first stable release. This package, and the Turbo client, should therefore be used with caution in a production environment. The version used in testing is *@hotwired/turbo==7.0.0-beta.2*.
 
 ============
 Requirements
@@ -56,7 +56,7 @@ This will also include all the allauth views.
 Subclasses
 ==========
 
-This package provides subclasses and template changes for the existing allauth views. Currently these views will not work with Turbo as form validation requires returning responses with a 422 status if validation fails.
+This package provides subclasses and template changes for the existing allauth views. Currently these views will not work with Turbo as form validation requires returning responses with a 422 status if validation fails and a 303 on redirect.
 
 The following subclasses have been added:
 
