@@ -1,6 +1,8 @@
 # Third Party Libraries
 from allauth.account import views as account_views
-from turbo_response.mixins import TurboFormMixin
+
+# Local
+from ..mixins import TurboFormMixin
 
 
 class LoginView(TurboFormMixin, account_views.LoginView):

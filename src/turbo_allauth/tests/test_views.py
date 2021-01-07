@@ -28,6 +28,7 @@ class TestLoginView:
             {"login": user.username, "password": test_password,},
         )
         assert resp.url == "/"
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
 
 
 class TestSignupView:
@@ -59,6 +60,7 @@ class TestSignupView:
         )
 
         assert resp.url == "/"
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
         user = user_model.objects.get(username="tester")
         assert user.check_password("good-pass-1234")
 
@@ -78,6 +80,7 @@ class TestEmailView:
         url = reverse("account_email")
         resp = client.post(url, {"action_add": "true", "email": "tester-2@gmail.com"})
         assert resp.url == url
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
         assert login_user.emailaddress_set.count() == 2
 
 
@@ -94,6 +97,7 @@ class TestPasswordResetView:
 
     def test_post_successful(self, client, user):
         resp = client.post(reverse("account_reset_password"), {"email": user.email})
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
         assert resp.url == reverse("account_reset_password_done")
 
 
@@ -150,6 +154,7 @@ class TestPasswordResetFromKeyView:
             {"password1": "good-testpass-1", "password2": "good-testpass-1",},
         )
         assert resp.url == reverse("account_reset_password_from_key_done")
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
 
 
 class TestSocialSignup:
@@ -169,5 +174,6 @@ class TestSocialSignup:
             {"email": "good-email@gmail.com", "username": "tester"},
         )
         assert resp.url == "/"
+        assert resp.status_code == http.HTTPStatus.SEE_OTHER
         user = user_model.objects.get(username="tester")
         assert user.email == "good-email@gmail.com"
