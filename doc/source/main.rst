@@ -39,9 +39,7 @@ Make sure to add **allauth.account** and **allauth.socialaccount** to **INSTALLE
         "allauth.socialaccount",
     ]
 
-
-
- Finally add this to your url configuration:
+Finally add this to your url configuration:
 
 .. code-block:: python
 
