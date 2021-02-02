@@ -2,7 +2,7 @@
 # Third Party Libraries
 from setuptools import find_packages, setup
 
-version = "0.0.3"
+version = "0.0.4"
 
 setup(
     name="django-turbo-allauth",
@@ -14,8 +14,8 @@ setup(
     long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
     long_description_content_type="text/markdown",
     license="MIT",
-    python_requires=">=3.8",
-    install_requires=["django (>=3.1)", "django-allauth",],
+    python_requires=">=3.7",
+    install_requires=["django (>=3.0)", "django-allauth"],
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
