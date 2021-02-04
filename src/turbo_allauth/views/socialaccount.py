@@ -1,11 +1,9 @@
 # Third Party Libraries
 from allauth.socialaccount import views as socialaccount_views
-
-# Local
-from ..mixins import TurboFormMixin
+from turbo_response.mixins import TurboFormAdapterMixin
 
 
-class SignupView(TurboFormMixin, socialaccount_views.SignupView):
+class SignupView(TurboFormAdapterMixin, socialaccount_views.SignupView):
     ...
 
 

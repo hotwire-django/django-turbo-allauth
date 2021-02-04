@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] - 2021-2-4
+
+Leverage turbo-response adapter mixin
+
 ## [0.0.4] - 2021-2-2
 
 Support for Python 3.7 and Django 3.0
