@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.6] - 2021-4-2
+
+Dependency updates
+
 ## [0.0.5] - 2021-2-4
 
 Leverage turbo-response adapter mixin
