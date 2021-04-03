@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# Third Party Libraries
 from setuptools import find_packages, setup
 
-version = "0.0.6"
+version = "0.0.7"
 
 setup(
     name="django-turbo-allauth",

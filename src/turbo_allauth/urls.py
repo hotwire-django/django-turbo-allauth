@@ -1,7 +1,5 @@
-# Django
 from django.urls import include, path, re_path
 
-# Local
 from .views import account, socialaccount
 
 urlpatterns = [

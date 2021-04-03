@@ -1,4 +1,3 @@
-# Third Party Libraries
 from allauth.socialaccount import views as socialaccount_views
 from turbo_response.mixins import TurboFormAdapterMixin
 
