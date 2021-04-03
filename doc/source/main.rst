@@ -1,4 +1,4 @@
-This package provides subclasses modifying the `django-allauth views <https://github.com/pennersr/django-allauth>`_ views in order to return valid return codes for use with Turbo.
+This package provides subclasses modifying the `django-allauth views <https://github.com/pennersr/django-allauth>`_ views in order to return valid return codes for use with Turbo. It uses the `django-turbo-response package <https://github.com/hotwire-django/django-turbo-response>`_ under the hood.
 
 This package is required in order to provide allauth compatability with Turbo. Turbo form validation either setting the attribute *data-turbo="false"* in the form, or returning a 4** response. This provides subclasses for the latter.
 
@@ -27,7 +27,7 @@ To install from Git:
 
 **Note**: This install does not include any client libraries (Turbo or Stimulus). You may wish to add these yourself using your preferred Javascript build tool, or use a CDN. Please refer to the Hotwire documentation on installing these libraries.
 
-Make sure to add **allauth.account** and **allauth.socialaccount** to **INSTALLED_APPS** as per the all-auth installation instructions. If you wish to use the default templates, you should also add **turbo_allauth** *before* these two apps:
+Make sure to add **allauth.account** and **allauth.socialaccount** to **INSTALLED_APPS** as per the all-auth installation instructions. If you wish to use the default templates, you should also add **turbo_allauth** *before* these two apps. You should also ensure **turbo_response** is added:
 
 
 .. code-block:: python
@@ -35,6 +35,7 @@ Make sure to add **allauth.account** and **allauth.socialaccount** to **INSTALLE
     INSTALLED_APPS = [
         ...
         "turbo_allauth",
+        "turbo_response",
         "allauth.account",
         "allauth.socialaccount",
     ]
