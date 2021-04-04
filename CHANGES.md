@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2021-4-4
+
+Removing support for Python 3.7
+
 ## [0.0.6] - 2021-4-2
 
 Dependency updates
