@@ -13,7 +13,7 @@ setup(
     long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
     long_description_content_type="text/markdown",
     license="MIT",
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
         "django (>=3.0)",
         "django-allauth",
@@ -22,7 +22,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Framework :: Django",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",

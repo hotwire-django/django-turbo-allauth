@@ -9,7 +9,7 @@ This package is required in order to provide allauth compatability with Turbo. T
 Requirements
 ============
 
-This library is tested for Python 3.7+ and Django 3.0+.
+This library is tested for Python 3.8+ and Django 3.0+.
 
 ===============
 Getting Started
