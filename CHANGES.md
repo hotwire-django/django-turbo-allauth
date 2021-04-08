@@ -4,8 +4,6 @@
 
 Add support for Django 3.2
 
-Remove support for Django 3.0
-
 ## [0.0.7] - 2021-4-4
 
 Removing support for Python 3.7

@@ -15,7 +15,7 @@ setup(
     license="MIT",
     python_requires=">=3.8",
     install_requires=[
-        "django (>=3.1)",
+        "django (>=3.0)",
         "django-allauth",
         "django-turbo-response (>=0.0.47)",
     ],
