@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 from setuptools import find_packages, setup
 
-version = "0.0.8"
+VERSION = "0.0.9"
 
 setup(
     name="django-turbo-allauth",
-    version=version,
+    version=VERSION,
     author="Dan Jacob",
     author_email="danjac2018@gmail.com",
     url="https://github.com/hotwire-django/django-turbo-allauth",
     description="Hotwired/Turbo subclasses for allauth views",
-    long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
+    long_description=open("README.md").read() + "\n\n" + open("CHANGELOG.md").read(),
     long_description_content_type="text/markdown",
     license="MIT",
     python_requires=">=3.8",
