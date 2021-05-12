@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from setuptools import find_packages, setup
 
-VERSION = "0.0.9"
+VERSION = "0.0.10"
 
 setup(
     name="django-turbo-allauth",
@@ -17,7 +17,7 @@ setup(
     install_requires=[
         "django (>=3.0)",
         "django-allauth",
-        "django-turbo-response (>=0.0.47)",
+        "django-turbo-response (>=0.0.49)",
     ],
     packages=find_packages(where="src"),
     package_dir={"": "src"},
